@@ -5,15 +5,116 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>War Cards Game</title>
+    <title>Cities Application</title>
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Local Css -->
     <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
+    <!-- Main Section -->
+    <main>
+        <header id="header-dark-mode" class="p-3">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none">
+                        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                            <use xlink:href="#bootstrap" /></svg>
+                    </a>
 
-    <script src="./script.js"></script>
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="#" class="nav-link px-2 text-secondary">Welcome to War Gards Game</a></li>
+                    </ul>
+
+                    <!-- Menu Drop down -->
+                    <div class="dropdown mx-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Click to Select">
+                            Menu
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#" onclick="gameHandler('Init')">Start New Game</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Display Dark/Light mode togle icon -->
+                    <svg id="icon-dark-mode" class="mode-icon" onclick="togleDisplayDarkLightMode()"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ;transform:
+                        ;msFilter:;">
+                        <path
+                            d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <div id="input-section-dark-mode" class="container">
+            <div class="container">
+                <div id="players-container" class="row row-cols-4">
+                    <!-- Players container will be fill by JavaScript Code -->
+                    <!-- ....... -->
+                </div>
+            </div>
+        </div>
+
+        <div id="deck-section-dark-mode" class="container">
+            <div id="cards-container" class="row row-cols-1 border-top">
+                <div class="deck">
+                    <br>
+                    <h3>A Deck of Cards</h3>
+                    <br>
+                    <div id="cards-deck">
+                        <!-- Game cards container will be fill by JavaScript Code -->
+                        <!-- ....... -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap" /></svg>
+                </a>
+                <span class="text-muted">&copy; 2022 Created By Elisha Bartov, +972547628238, Full Stack Designer</span>
+                <span class="text-muted">Version 1.0</span>
+            </div>
+
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                            <use xlink:href="#twitter" /></svg></a></li>
+                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                            <use xlink:href="#instagram" /></svg></a></li>
+                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                            <use xlink:href="#facebook" /></svg></a></li>
+            </ul>
+        </footer>
+    </div>
+
+    <!-- Local JavaScript Links -->
+    <script src="./JavaScript/gameCards.js"></script>
+    <script src="./JavaScript/playerClass.js"></script>
+    <script src="./JavaScript/localStorage.js"></script>
+    <script src="./JavaScript/DOM.js"></script>
+    <script src="./JavaScript/script.js"></script>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+
 
 </body>
 
