@@ -33,29 +33,57 @@ function shuffle(deck)
 	}
 }
 
+function renderCard(deck,index,element) {
+	let card = document.createElement("div");
+	let value = document.createElement("div");
+	let suit = document.createElement("div");
+
+	card.className = "card";
+	value.className = "value";
+	suit.className = "suit " + deck[index].Suit;
+
+	value.innerHTML = deck[index].Value;
+	card.appendChild(value);
+	card.appendChild(suit);
+
+	element.appendChild(card);
+}
+
 function renderDeck(deck,numOfCards)
 {
     document.getElementById("cards-deck").innerHTML = "";
 
 	//for(let i = 0; i < deck.length; i++)
+	let cardsDeckElement = document.getElementById("cards-deck");
+
 	for(let i = 0; i < numOfCards; i++)
 	{
-		let card = document.createElement("div");
-		let value = document.createElement("div");
-		let suit = document.createElement("div");
-
-
-		card.className = "card";
-		value.className = "value";
-		suit.className = "suit " + deck[i].Suit;
-
-		value.innerHTML = deck[i].Value;
-		card.appendChild(value);
-		card.appendChild(suit);
-
-		document.getElementById("cards-deck").appendChild(card);
+		renderCard(deck,i,cardsDeckElement);
 	}
 }
+// function renderDeck(deck,numOfCards)
+// {
+//     document.getElementById("cards-deck").innerHTML = "";
+
+// 	//for(let i = 0; i < deck.length; i++)
+// 	for(let i = 0; i < numOfCards; i++)
+// 	{
+// 		let card = document.createElement("div");
+// 		let value = document.createElement("div");
+// 		let suit = document.createElement("div");
+
+
+// 		card.className = "card";
+// 		value.className = "value";
+// 		suit.className = "suit " + deck[i].Suit;
+
+// 		value.innerHTML = deck[i].Value;
+// 		card.appendChild(value);
+// 		card.appendChild(suit);
+
+// 		document.getElementById("cards-deck").appendChild(card);
+// 	}
+// }
 
 // Global deck of Cards
 let gameDeck;
@@ -69,8 +97,8 @@ function showGameCards() {
     renderDeck(gameDeck,gameDeck.length);
 }
 
-function getRandomCard(deck) {
+function getRandomCardLocation(deck) {
 	let location = Math.floor((Math.random() * deck.length));
 
-	return deck[location]; 
+	return location; 
 }

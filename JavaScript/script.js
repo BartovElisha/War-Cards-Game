@@ -30,11 +30,17 @@ function startNewGame() {
         alert("Invalid Number of Players !!!");    
         return false;    
     }
+    createNewDack();
     newGameStep();
 }
 
 function newGameStep() {
     numberOfPlayers = getNumOfPlayers();
+
+    if(gameDeck.length < numberOfPlayers) {
+        stopGame();
+        return;
+    }
 
     // Remove All Elements from Page
     removeAllElements(numberOfPlayers);
@@ -47,7 +53,6 @@ function newGameStep() {
         enableGetCardButton(i);
     }
 
-    createNewDack();
     showGameCards(gameDeck.length);
 
     numOfMoves = 0;
@@ -60,15 +65,20 @@ function runGameStep(playerIndex) {
 
     player = getPlayerData(`player-${playerIndex}`);
 
-    let randomCard = getRandomCard(gameDeck);
+    let randomCardLocation = getRandomCardLocation(gameDeck);
 
-    player.score = randomCard.Score;
-    player.totalScore += randomCard.Score;
+    player.score = gameDeck[randomCardLocation].Score;
+    player.totalScore += gameDeck[randomCardLocation].Score;
     savePlayerData(`player-${playerIndex}`,player);
 
     numOfMoves++;
 
     updatePlayersScore(playerIndex,player);
+    showPlayerCard(playerIndex,randomCardLocation);
+    gameDeck.splice(randomCardLocation,1);
+
+    // Show updated gameDeck
+    showGameCards(gameDeck.length);
     
     if(numOfMoves >= getNumOfPlayers()) {
         checkWinner();
@@ -99,4 +109,26 @@ function checkWinner() {
     }
 
     showWinner(winner);
+}
+
+function checkFinalWinner() {
+    let finalWinner = new Player();
+    let player = new Player();
+    let numberOfPlayers = getNumOfPlayers();
+
+    finalWinner = getPlayerData(`player-1`);
+
+    for(let i = 2;i <= numberOfPlayers;i++) {
+        player = getPlayerData(`player-${i}`);
+
+        if(player.totalScore > finalWinner.totalScore) {
+            finalWinner = getPlayerData(`player-${i}`);    
+        }
+    }
+
+    showFinalWinner(finalWinner);
+}
+
+function stopGame() {
+    checkFinalWinner();
 }

@@ -31,11 +31,12 @@ function generatePlayerCard(playerIndex) {
 
     let template =
                 `<div id="player-${playerIndex}" class="col my-2">`+
-                    `<div class="card city-card shadow-lg" style="width: 15rem;">`+
+                    `<div class="card shadow-lg" style="width: 13rem;">`+
                         `<div class="toast-header">`+
                             `<strong class="me-auto">Player ${playerIndex}</strong>`+
                             `<img src="./Images/pexels-pixabay-39018.jpg" class="card-img-top image-box" alt="...">`+
                         `</div>`+
+
                         `<div class="card-body">`+
                             `<div class="row">`+
                                 `<div class="col">`+
@@ -45,6 +46,7 @@ function generatePlayerCard(playerIndex) {
                                     `<span>${player.name}</span>`+
                                 `</div>`+
                             `</div>`+
+
                             `<div class="row">`+
                                 `<div class="col">`+
                                     `<h6 class="card-title">Score:</h6>`+
@@ -53,6 +55,7 @@ function generatePlayerCard(playerIndex) {
                                     `<span>${player.score}</span>`+
                                 `</div>`+
                             `</div>`+
+
                             `<div class="row">`+
                                 `<div class="col">`+
                                     `<h6 class="card-title">Total:</h6>`+
@@ -61,13 +64,16 @@ function generatePlayerCard(playerIndex) {
                                     `<strong>${player.totalScore}</strong>`+
                                 `</div>`+
                             `</div>`+
-                            `<div class="row">`+
-                                `</div>`+
-                                `<div class="col">`+
+
+                            `<div class="container">`+
+                                //`<div class="container">`+
                                     `<button id="player-${playerIndex}-button" type="button" class="btn btn-success disabled" onclick="getCard(${playerIndex})">Get Card</button>`+
-                                `</div>`+
-                                `<div class="col">`+
-                                `</div>`+
+                                //`</div>`+
+                            `</div>`+
+
+                            `<div id="card-${playerIndex}" class="container">`+
+                                `<br></br>`+
+                                // Current getted game card
                             `</div>`+
                         `</div>`+
                     `</div>`+
@@ -111,6 +117,12 @@ function updatePlayersScore(playerIndex,player) {
     }
 }
 
+function showPlayerCard(playerIndex,randomCardLocation) {
+    let playerCardElement = document.getElementById(`card-${playerIndex}`);    
+
+    renderCard(gameDeck,randomCardLocation,playerCardElement)
+}
+
 function showWinner(winner) {
     setTimeout(function() {
         if(document.getElementById(`${winner.playerId}`)) {
@@ -118,6 +130,15 @@ function showWinner(winner) {
             playerCardElement.firstChild.classList.add("winner");
         }
     }, 2000);
+}
+
+function showFinalWinner(finalWinner) {
+    setTimeout(function() {
+        if(document.getElementById(`${finalWinner.playerId}`)) {
+            let playerCardElement = document.getElementById(`${finalWinner.playerId}`);
+            playerCardElement.firstChild.classList.add("final-winner");
+        }
+    }, 5000);
 }
 
 function removeAllElements(numberOfPlayers) {    
