@@ -30,8 +30,14 @@ function startNewGame() {
         alert("Invalid Number of Players !!!");    
         return false;    
     }
+    newGameStep();
+}
 
+function newGameStep() {
     numberOfPlayers = getNumOfPlayers();
+
+    // Remove All Elements from Page
+    removeAllElements(numberOfPlayers);
 
     for(let i = 1;i <= numberOfPlayers;i++) {
         generatePlayerCard(i);
@@ -43,8 +49,11 @@ function startNewGame() {
 
     createNewDack();
     showGameCards(gameDeck.length);
-    return 'Succsess'
+
+    numOfMoves = 0;
 }
+
+let numOfMoves;
 
 function runGameStep(playerIndex) {
     let player = new Player();
@@ -57,48 +66,21 @@ function runGameStep(playerIndex) {
     player.totalScore += randomCard.Score;
     savePlayerData(`player-${playerIndex}`,player);
 
-    moves++;
+    numOfMoves++;
 
     updatePlayersScore(playerIndex,player);
     
-    if(moves >= getNumOfPlayers()) {
+    if(numOfMoves >= getNumOfPlayers()) {
         checkWinner();
-        return 'Finished';
+        setTimeout(function() {
+            newGameStep();
+        }, 5000);
     }
-}
-
-let state;
-let moves;
-
-function gameHandler(state,playerIndex) {
-    switch(state) {
-        case 'Init':
-            if(startNewGame() == 'Succsess') {
-                moves = 0;
-                state = 'Run';
-            }            
-            break;
-
-        case 'Run':
-            if(runGameStep(playerIndex) == 'Finished') {
-                state = 'Idle';
-            }
-            break;
-            
-        case 'Idle':
-            // Do Nothing, Wait Until New Game !!!
-            break;
-
-        default:
-            state = 'Idle';
-            break;
-    }
-    
 }
 
 function getCard(playerIndex) {    
     disableGetCardButton(playerIndex);
-    gameHandler('Run',playerIndex);
+    runGameStep(playerIndex);
 }
 
 function checkWinner() {
@@ -111,7 +93,7 @@ function checkWinner() {
     for(let i = 2;i <= numberOfPlayers;i++) {
         player = getPlayerData(`player-${i}`);
 
-        if(player.totalScore > winner.totalScore) {
+        if(player.score > winner.score) {
             winner = getPlayerData(`player-${i}`);    
         }
     }
