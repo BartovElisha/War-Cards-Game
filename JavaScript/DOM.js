@@ -16,10 +16,10 @@ function togleDisplayDarkLightMode() {
     DarkSvgiconElement.classList.toggle("icon-dark");
 
     // Input Section Element update Dark/Light mode
-    inputSectionElement.classList.toggle("text-white");
+    //inputSectionElement.classList.toggle("text-white");
 
     // Deck Section Element update Dark/Light mode
-    deckSectionElement.classList.toggle("text-white");
+    //deckSectionElement.classList.toggle("text-white");
 }
 
 function generatePlayerCard(playerIndex) {
