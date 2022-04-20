@@ -8,7 +8,8 @@ function getDeck()
 
 	for(let i = 0; i < suits.length; i++)
 	{
-		for(let x = 0; x < values.length; x++)
+		for(let x = 0; x < 3; x++)
+		// for(let x = 0; x < values.length; x++)
 		{
 			let card = {Value: values[x], Suit: suits[i], Score: score[x]};
 			deck.push(card);
@@ -93,11 +94,18 @@ function createNewDack() {
 }
 
 function showGameCards() {
+	if(gameDeck.length == 0) {
+		return;
+	}	
     shuffle(gameDeck);
     renderDeck(gameDeck,gameDeck.length);
 }
 
 function getRandomCardLocation(deck) {
+	if(deck.length == 0) {
+		return;
+	}
+
 	let location = Math.floor((Math.random() * deck.length));
 
 	return location; 

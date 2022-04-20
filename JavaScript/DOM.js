@@ -32,7 +32,7 @@ function generatePlayerCard(playerIndex) {
     let template =
                 `<div id="player-${playerIndex}" class="col my-2">`+
                     `<div class="card shadow-lg" style="width: 13rem;">`+
-                        `<div class="toast-header">`+
+                        `<div id="player-${playerIndex}-header" class="toast-header">`+
                             `<strong class="me-auto">Player ${playerIndex}</strong>`+
                             `<img src="./Images/pexels-pixabay-39018.jpg" class="card-img-top image-box" alt="...">`+
                         `</div>`+
@@ -133,19 +133,32 @@ function showWinner(winner) {
 }
 
 function showFinalWinner(finalWinner) {
+    debugger
     setTimeout(function() {
         if(document.getElementById(`${finalWinner.playerId}`)) {
             let playerCardElement = document.getElementById(`${finalWinner.playerId}`);
+            let playerHeaderElement = document.getElementById(`${finalWinner.playerId}-header`);
+            let childPlayerHeaderElement = playerHeaderElement.childNodes[0];
+            
+            childPlayerHeaderElement.innerHTML = "Winner !!! &#128515";
             playerCardElement.firstChild.classList.add("final-winner");
         }
-    }, 5000);
+    }, 2000);
 }
 
-function removeAllElements(numberOfPlayers) {    
+function removeAllPlayersElements(numberOfPlayers) {    
     for(let i = 1;i <= numberOfPlayers;i++) {
         if(document.getElementById(`player-${i}`)) {
             let playerCardElement = document.getElementById(`player-${i}`);
             playerCardElement.remove();    
         }
+    }
+}
+
+function removeAllDeckElements() {
+    let cardsDeckElement = document.getElementById("cards-deck");
+
+    while(cardsDeckElement.firstChild) {
+        cardsDeckElement.removeChild(cardsDeckElement.lastChild);
     }
 }
