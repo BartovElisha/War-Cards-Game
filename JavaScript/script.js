@@ -60,9 +60,11 @@ let numOfMoves;
 
 function runGameStep(playerIndex) {
     let player = new Player();
+    let numberOfPlayers = getNumOfPlayers();
 
     removeAllDeckElements();
     player = getPlayerData(`player-${playerIndex}`);
+
 
     let randomCardLocation = getRandomCardLocation(gameDeck);
 
@@ -83,6 +85,10 @@ function runGameStep(playerIndex) {
         if(gameDeck.length == 0) {        
             checkFinalWinner();
             return;    
+        }
+        if(gameDeck.length < numberOfPlayers) {
+            stopGame();
+            return;
         }
         checkWinner();
         setTimeout(function() {

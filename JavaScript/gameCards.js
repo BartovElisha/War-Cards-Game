@@ -8,8 +8,7 @@ function getDeck()
 
 	for(let i = 0; i < suits.length; i++)
 	{
-		for(let x = 0; x < 3; x++)
-		// for(let x = 0; x < values.length; x++)
+		for(let x = 0; x < values.length; x++)
 		{
 			let card = {Value: values[x], Suit: suits[i], Score: score[x]};
 			deck.push(card);
@@ -23,7 +22,7 @@ function shuffle(deck)
 {
 	// for 100 turns
 	// switch the values of two random cards
-	for (let i = 0; i < 100; i++)
+	for (let i = 0; i < 1000; i++)
 	{
 		let location1 = Math.floor((Math.random() * deck.length));
 		let location2 = Math.floor((Math.random() * deck.length));

@@ -72,7 +72,7 @@ function generatePlayerCard(playerIndex) {
                             `</div>`+
 
                             `<div id="card-${playerIndex}" class="container">`+
-                                `<br></br>`+
+                                `<br>`+
                                 // Current getted game card
                             `</div>`+
                         `</div>`+
